@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from '../../apiUrl.js'; 
 import {CharacterProps} from '../../components-lor/Character.js' ;
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
+
 function CharactersPage() {
   const [characters, setCharacters] = useState<CharacterProps[]>([]);
   // const [characters, setCharacters] = useState<[]>([]); // initaliser avec untabl vide pour ne pas avoir besoin de fr affichage conditionnel ?
@@ -45,6 +56,29 @@ function CharactersPage() {
       </ul>
     </div>
   );
+
+  //Menu foireux à reprendre plus tard qd home ok
+//   return (
+//     <>
+//     <h1>Liste des personnages</h1>
+//     <NavigationMenu>
+//       <NavigationMenuList>
+//       <NavigationMenuTrigger>
+// Personnages          
+//       {characters.map(character => (
+//         <NavigationMenuItem>
+//           <NavigationMenuContent>
+//           <Link to={`/character/${character.id}`}>
+//             <NavigationMenuLink>{character.nickname}</NavigationMenuLink>
+//           </Link>
+//           </NavigationMenuContent>
+//           </NavigationMenuItem>
+//         ))}
+//         </NavigationMenuTrigger>
+//       </NavigationMenuList>
+//     </NavigationMenu>    
+//     </>
+//   );
 }
 
 export default CharactersPage;
