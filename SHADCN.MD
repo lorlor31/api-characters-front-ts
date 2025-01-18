@@ -37,3 +37,24 @@ Options:
   -h, --help         display help for command
 
 ```
+
+## Utilisation des composants
+
+Attention si l'import ne fonctionne pas, bien vérifier la config de vite pour utiliser le bon alias
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path';
+
+// https://vite.dev/config/
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'), 
+    },
+  },
+  plugins: [react()],
+})
+
+```
