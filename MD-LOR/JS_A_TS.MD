@@ -4,7 +4,7 @@
 1. Recréer la trame du projet avec Vite.js et les dépendances requises
 2. Nommer ts les fichiers .jsx en .tsx
 3. Déclarer des props pour les composants en place
-4. 
+4. Déclarer des props pour les hooks et les events
 
 ## Trame du projet vite/React/TS/TW/Shadcn 
 
@@ -90,7 +90,7 @@ et configurer
 
  cf. https://ui.shadcn.com/docs/installation/vite
 
- ## Choses à rajouter dans le jsx pour qu'il devienne du tsx
+## Choses à rajouter dans le jsx pour qu'il devienne du tsx
 
 ### Typer les props des composants
 
@@ -127,7 +127,7 @@ const MyComponent: React.FC<Props> = ({ title, count }) => {
 
 Mais la solution 2 semble être la plus simple et flexible.
 
-### Typer les hooks cf [https://react.dev/learn/typescript]
+### Typer les hooks cf [react.dev](https://react.dev/learn/typescript)
 
 1. Exp avec useState()
 
@@ -146,7 +146,7 @@ const [status, setStatus] = useState<Status>("idle");
 - Mettre des valeurs par défaut
 - Qd pad de type défini mettre `any`
 
-### Types
+### Types courants
 
 boolean
 number
@@ -166,3 +166,8 @@ object
 React.FormEvent<HTMLFormElement> : Utilisé pour les événements liés à un formulaire (<form>).
 React.ChangeEvent<HTMLInputElement> : Utilisé pour les événements liés à des éléments <input>, comme lors de la modification de texte dans un champ de saisie.
 React.MouseEvent<HTMLButtonElement> : Utilisé pour les événements liés à un clic sur un bouton.
+
+## Ressources 
+- [React TS cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example
+)
+- [react.dev](https://react.dev/learn/typescript)

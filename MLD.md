@@ -21,7 +21,9 @@ En fait on va utiliser le User du SecurityBundle (cf Memento)
 |**is_admin** | bool|droits admin|default false|
 |**birthDate** |date | date de naissance|--a voir-- NULL|
 
-## Stories (many-to-one) un personnage petu avoir pkusieurs histoire
+## Stories (many-to-many) 
+un personnage peut avoir plusieurs histoires
+une histoire peut impliquer plusieurs personnages existants
 |Propriété |Type| Descr|Autre |
 |---|:-:|:-:| :-:|
 |**id** | int| |unique|

@@ -3,7 +3,7 @@
 ## Créer le projet
 
 ` npm create vite@latest`
-`npm install axios`
+` npm install axios`
 ## Organisation des dossiers
 
 cf la structure du projet
@@ -36,7 +36,7 @@ my-app/
 ```
 
 
-## Problème de CORS
+## Problème de CORS en cas d'appel API
 
 Résolution temporaire en attendant de config le CORS sur l'api
 ajouter un proxy dans vite.config.js
@@ -97,3 +97,60 @@ export default App;
 
 ```
 
+
+
+## Utiliser Font Awesome avec React 
+[Site officiel](https://docs.fontawesome.com/v5/web/use-with/react)
+
+1. Installer les packages 
+
+NB pour React Native c'est pas les mêmes packages
+
+```shell
+npm i --save @fortawesome/fontawesome-svg-core
+npm install --save @fortawesome/free-solid-svg-icons
+npm install --save @fortawesome/react-fontawesome
+```
+
+2. Utiliser les icônes - [Liste des icônes](https://fontawesome.com/v5/search?ic=brands)
+
+
+Deux manières :
+- individuelle : plus longue ms plus optimale
+- globale : moins optimale ms pratique si on en utilise bcp
+
+Exemple pour la méthode individuelle :
+
+```js
+import ReactDOM from 'react-dom'
+// On importe FA
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// On importe chaque icône nécessaire ds le composant
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+// Utilisation de l'icône
+const element = <FontAwesomeIcon icon={faCoffee} />
+// On peut utiliser les syntaxes suivantes :
+<FontAwesomeIcon icon="coffee" />
+<FontAwesomeIcon icon={['fas', 'coffee']} />
+<FontAwesomeIcon icon={['far', 'coffee']} />
+<FontAwesomeIcon icon={faCoffee} />
+
+ReactDOM.render(element, document.body)
+```
+
+3. Features styles
+
+On peut apparemment styliser (cf [Doc](https://docs.fontawesome.com/v5/web/use-with/react), section Features) :
+
+```js
+//Extraits de propriétés à essayer
+size="xs"
+size="lg"
+fixedWidth
+listItem
+rotation={90} 
+icon="spinner" spin 
+border
+etc...
+```
