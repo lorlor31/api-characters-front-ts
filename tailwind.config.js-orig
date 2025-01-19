@@ -1,14 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
-  content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
+    darkMode: ["class"],
+    content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
-		backgroundImage: {//prend comme réf le dossier public/
-			'wave': "url('/wave.svg')",
-			'wave2': "url('/wave2.svg')",
-			'cloudy': "url('/cloudy.svg')",
-		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -59,4 +54,5 @@ export default {
   	}
   },
   plugins: [require("tailwindcss-animate")],
-};
+}
+

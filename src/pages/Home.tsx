@@ -11,39 +11,10 @@ import {
 } from "@/components/ui/navigation-menu" ;
 
 function Home() {
-
-//   return (
-//     <div>
-//       <h1>Menu</h1>
-//       <ul>
-//           <li>
-//             <Link to={`/characters`}>
-//               Personnages
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to={`/character/new`}>
-//               Créer un perso
-//             </Link>
-//           </li>
-//       </ul>
-//     </div>
-//   );
-
-// return (
-//   <NavigationMenu>
-//     <NavigationMenuList>
-//         <NavigationMenuTrigger>Personnages</NavigationMenuTrigger>
-//       <NavigationMenuItem>
-//           <Link to={`/characters`}>
-//             <NavigationMenuLink>Créer</NavigationMenuLink>
-//           </Link>
-//       </NavigationMenuItem>
-//     </NavigationMenuList>
-//   </NavigationMenu>
-// );
 return (
-  <NavigationMenu>
+  <>
+  <h1 className="w-screen mx-auto">HOME</h1>
+  <NavigationMenu className="w-full container mx-auto bg-red-400 ">
     <NavigationMenuList>
       <NavigationMenuItem>
         <Link to={`/characters`}>
@@ -77,6 +48,7 @@ return (
       </NavigationMenuItem>
     </NavigationMenuList>
   </NavigationMenu>
+  </>
 );
 }
 

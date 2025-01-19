@@ -58,3 +58,30 @@ export default defineConfig({
 })
 
 ```
+
+On importe le composant puis on l'utilise en suivant les exemples de la doc.
+
+## Style des composants
+
+- On peut utiliser les 1/ classes utilitaires de Tailwind ou les 2/CSS variables :
+1. on utilisera les class du genre bg-red-300
+2. on utilisera les class du genre bg-background
+
+## Style avec les CSS Variables
+
+- Dès le départ, bien choisir lors de l'initialisation de shadcn css variables pour qui'l soit à true dans componenrs.json
+- Dans tailwind.config.js, on a la config des couleurs principales etc liées à des variables CSS qu'on va définir dans le fichier principal CSS /src/App.css .
+- Bien vérifier que ce fichier App.css utilise Tailwind 
+```css
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities; 
+```
+- Bien vérifier que Main.tsx(fichier d'entrée de l'App) a bien en import les fichiers css soit
+```
+import './index.css'
+import './App.css'
+
+```
+- Ainsi on pourra définir les variables CSS dans le fichier App.css et les utiliser avec les classes de type `bg-background`
+- Il y a les themes generator qui vont générer ce fichier.

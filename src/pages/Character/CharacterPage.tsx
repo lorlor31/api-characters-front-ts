@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import Character from '../../components-lor/Character';
+import ColorsPalette from '../../components-lor/ColorsPalette';
+
 import {CharacterProps} from '../../components-lor/Character';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -33,10 +35,16 @@ const CharacterPage = () => {
   if (error) return <p>Erreur : {error}</p>;
 
   return (
-    <div>
-      <h1>Character Page</h1>
+    <>
+    <ColorsPalette/>
+    <div className="container w-screen bg-wave flex flex-col justify-center items-center  ">
+      {character  
+      ? <h1 className="text-6xl bg-accent">Profil de {character.nickname} </h1>
+      : <h1>Salut</h1> }
       {character ? <Character {...character} /> : <p>Aucun personnage trouvé.</p>}
       </div>
+      </>
+
   );
 };
 
