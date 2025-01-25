@@ -59,4 +59,9 @@ export default {
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    {
+      pattern: /bg-\[url\(.*?\)\]/, // Conserve les classes qui matchent bg-[url(...)]
+    },
+  ],
 };

@@ -7,6 +7,7 @@
 ## Organisation des dossiers
 
 cf la structure du projet
+> Mettre les images dans /src/assets
 
 ```bash
 

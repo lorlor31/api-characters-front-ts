@@ -1,8 +1,9 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
 } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
-
+import {shuffle} from "@/functions/shuffle"
+import { badgeVariants } from "@/components/ui/badge"
+import { Link } from 'react-router-dom';
 
 export interface CharacterProps {
   id:number ;
@@ -13,6 +14,7 @@ export interface CharacterProps {
   longDescription: string;
   backgroundImage?: string; 
   avatarImage?: string; 
+  personalities?:Array<object>;
 
 }
 
@@ -47,29 +49,42 @@ const Character = ({ ...character }: CharacterProps)=> {
     "giraf",
     "girl",    
   ]
-  const shuffle = (array:[]) => {
-    for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-    } 
-    return array; }
   const shuffledAvatars=shuffle(avatars);
   const randomAvatarImage= shuffledAvatars[0];
 
+  const badgeColors = [
+    {"gentil": "green"},
+    {"courageux": "red"},
+    {"intelligent": "blue"},
+    {"dynamique": "yellow"},
+    {"mystérieux": "purple"},
+    // {"personality" : "gentil", "color" : "green", },
+    // {"personality" : "courageux", "color" : "red", },
+    // {"personality" : "intelligent", "color" : "blue", },
+    // {"personality" : "dynamique", "color" : "yellow", },
+    // {"personality" : "mystérieux", "color" : "purple", },
+
+  ];
+  for (let badgeColor of badgeColors){
+    console.log(badgeColor["gentil"]);
+  }
+
   return (
   <>
-    <Card className="character bg-accent border-destructive container w-full mx-auto flex flex-col justify-center items-center">
-      <CardHeader className="flex flex-col items-start">
-      <Avatar>
-      <AvatarImage src={character.avatarImage
-        ?character.avatarImage
-        :`/src/assets/images/${randomAvatarImage}.jpg`}/>
+    <Card className="character border-green border-lg border-solid container w-full mx-auto flex flex-col justify-center items-center ">
+    <CardHeader
+    className={`flex flex-col items-center relative bg-[url('/src/assets/images/backgrounds/${character.backgroundImage}.jpg')]`}
+    >
+      <Avatar className="w-48 h-48  -top-[12rem]  mx-auto border-white border-solid border-4  ">
+      <AvatarImage className=" border-white border-solid border-6"src={character.avatarImage
+        ?`/src/assets/images/avatars/${character.avatarImage}`
+        :`/src/assets/images/avatars/${randomAvatarImage}.jpg`}/>
       <AvatarFallback>AvatarFallback</AvatarFallback>
       </Avatar>
 
-      <CardTitle>{character.nickname}</CardTitle>
+      <CardTitle className="text-8xl absolute -top-[74px] text-center drop-shadow-[2px_-5px_rgba(255,255,255,1)] ">{character.nickname}</CardTitle>
       <CardDescription>{character.abstract}</CardDescription>
-      </CardHeader>
+    </CardHeader>
       <CardContent>
         <p> Né(e) le : {formattedBirthDate} </p>
           {character.deathDate 
@@ -79,6 +94,11 @@ const Character = ({ ...character }: CharacterProps)=> {
         <p>{character.longDescription}</p>  
       </CardContent>
       <CardFooter>
+        {character.personalities?.map((personality,index) => (
+          <Link key={index} className={`${badgeVariants({ variant: "outline" })} bg-${badgeColors[personality.value]}-200`} to="/characters">
+          {personality.value}
+          </Link>
+        ))}
         <p>TAgs ici</p>
       </CardFooter>
     </Card>
