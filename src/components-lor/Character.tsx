@@ -52,22 +52,23 @@ const Character = ({ ...character }: CharacterProps)=> {
   const shuffledAvatars=shuffle(avatars);
   const randomAvatarImage= shuffledAvatars[0];
 
-  const badgeColors = [
-    {"gentil": "green"},
-    {"courageux": "red"},
-    {"intelligent": "blue"},
-    {"dynamique": "yellow"},
-    {"mystérieux": "purple"},
+  const badgeColors = {
+    "gentil": "green",
+    "courageux": "red",
+    "intelligent": "grey",
+    "dynamique": "amber",
+    "mystérieux": "amber",
     // {"personality" : "gentil", "color" : "green", },
     // {"personality" : "courageux", "color" : "red", },
     // {"personality" : "intelligent", "color" : "blue", },
     // {"personality" : "dynamique", "color" : "yellow", },
     // {"personality" : "mystérieux", "color" : "purple", },
 
-  ];
-  for (let badgeColor of badgeColors){
-    console.log(badgeColor["gentil"]);
-  }
+  };
+
+  const color = 'red' ;
+
+  console.log(badgeColors['gentil']);
 
   return (
   <>
@@ -93,13 +94,14 @@ const Character = ({ ...character }: CharacterProps)=> {
           }
         <p>{character.longDescription}</p>  
       </CardContent>
-      <CardFooter>
+      <CardFooter >
         {character.personalities?.map((personality,index) => (
-          <Link key={index} className={`${badgeVariants({ variant: "outline" })} bg-${badgeColors[personality.value]}-200`} to="/characters">
+          // <Link key={index} className={`${badgeVariants({ variant: "outline" })} bg-${badgeColors[personality.value]}-200`} to="/characters">
+          <Link key={index} className={`${badgeVariants({ variant: "outline" })} bg-${badgeColors[personality.value]}-400`} to="/characters">
+
           {personality.value}
           </Link>
         ))}
-        <p>TAgs ici</p>
       </CardFooter>
     </Card>
   </>
