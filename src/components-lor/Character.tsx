@@ -17,6 +17,7 @@ export interface CharacterProps {
   personalities?:Array<object>;
 
 }
+let bgClass = "chart-1";
 
 const Character = ({ ...character }: CharacterProps)=> {
   const birthDate = new Date(character.birthDate);
@@ -52,23 +53,25 @@ const Character = ({ ...character }: CharacterProps)=> {
   const shuffledAvatars=shuffle(avatars);
   const randomAvatarImage= shuffledAvatars[0];
 
-  const badgeColors = {
-    "gentil": "green",
-    "courageux": "red",
-    "intelligent": "grey",
-    "dynamique": "amber",
-    "mystérieux": "amber",
-    // {"personality" : "gentil", "color" : "green", },
-    // {"personality" : "courageux", "color" : "red", },
-    // {"personality" : "intelligent", "color" : "blue", },
-    // {"personality" : "dynamique", "color" : "yellow", },
-    // {"personality" : "mystérieux", "color" : "purple", },
-
-  };
-
-  const color = 'red' ;
-
-  console.log(badgeColors['gentil']);
+  const personalitiesColors = [
+    { name: 'green', values: ['gentil'] },
+    { name: 'red', values: ['impatient', 'menteur', 'hypocrite', 'arriviste', 'méchant'] },
+    { name: 'yellow', values: ['courageux', 'dynamique', 'vif', 'hyperactif', 'aventurier'] },
+    { name: 'purple', values: ['naïf', 'modeste', 'fragile'] },
+    { name: 'orange', values: ['intelligent', 'mystérieux', 'charmeur', 'ambitieux', 'perspicace', 'fort'] },
+    { name: 'blue', values: ['calme', 'serein', 'doux'] },
+  ];
+  
+  const setBadgeBgColor = function (personality: string) {
+    personalitiesColors.forEach((color,) => {
+      if(color.values.includes(personality)==true) {
+        let tone = (color.values.indexOf(personality)+1) *100 ;
+        bgClass= `bg-${color.name}-${tone}`;
+        return bgClass ;
+      }
+    });
+    return bgClass;
+  }
 
   return (
   <>
@@ -86,6 +89,7 @@ const Character = ({ ...character }: CharacterProps)=> {
       <CardTitle className="text-8xl absolute -top-[74px] text-center drop-shadow-[2px_-5px_rgba(255,255,255,1)] ">{character.nickname}</CardTitle>
       <CardDescription>{character.abstract}</CardDescription>
     </CardHeader>
+        <div className="w-5 h-5 bg-chart-2"></div>
       <CardContent>
         <p> Né(e) le : {formattedBirthDate} </p>
           {character.deathDate 
@@ -95,13 +99,15 @@ const Character = ({ ...character }: CharacterProps)=> {
         <p>{character.longDescription}</p>  
       </CardContent>
       <CardFooter >
-        {character.personalities?.map((personality,index) => (
-          // <Link key={index} className={`${badgeVariants({ variant: "outline" })} bg-${badgeColors[personality.value]}-200`} to="/characters">
-          <Link key={index} className={`${badgeVariants({ variant: "outline" })} bg-${badgeColors[personality.value]}-400`} to="/characters">
-
+        {character.personalities?.map((personality: any, index: number) => {
+          bgClass = setBadgeBgColor(personality.value);
+          return (       
+         <Link key={index} className={`${badgeVariants({ variant: "outline" })} ${bgClass}
+         `} to="/characters">
           {personality.value}
-          </Link>
-        ))}
+          </Link> 
+          )})}   
+        
       </CardFooter>
     </Card>
   </>

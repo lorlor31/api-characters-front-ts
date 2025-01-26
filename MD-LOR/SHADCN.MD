@@ -85,3 +85,4 @@ import './App.css'
 ```
 - Ainsi on pourra définir les variables CSS dans le fichier App.css et les utiliser avec les classes de type `bg-background`
 - Il y a les themes generator qui vont générer ce fichier.
+- To add new colors, you need to add them to your CSS file and to your tailwind.config.js file.
