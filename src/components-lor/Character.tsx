@@ -4,6 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {shuffle} from "@/functions/shuffle"
 import { badgeVariants } from "@/components/ui/badge"
 import { Link } from 'react-router-dom';
+import { convertDate } from '@/functions/convertDate';
+
+convertDate
 
 export interface CharacterProps {
   id:number ;
@@ -22,26 +25,9 @@ let bgClass = "chart-1";
 const Character = ({ ...character }: CharacterProps)=> {
   const birthDate = new Date(character.birthDate);
   const formattedBirthDate = birthDate.toLocaleDateString('fr-FR');
+  const deathDate = character.deathDate ? new Date(character.deathDate) : '';
+  const formattedDeathDate = deathDate ? deathDate.toLocaleDateString('fr-FR'): '';
 
-  // Calculate the age in Y/M/D of the character returned in string
-  const getAgeInYearsMonthsDays = (birthDate:Date) => {
-    const today = new Date();
-    let years = today.getFullYear() - birthDate.getFullYear();
-    let months = today.getMonth() - birthDate.getMonth();
-    let days = today.getDate() - birthDate.getDate();
-    // Ajuster si les jours sont négatifs
-    if (days < 0) {
-        months -= 1;
-        const previousMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-        days += previousMonth.getDate();
-    }
-    // Ajuster si les mois sont négatifs
-    if (months < 0) {
-        years -= 1;
-        months += 12;
-    }
-    return `${years} ans, ${months} mois et ${days} jours`;
-  };
 
   //Pick a random avatar if not defined
   const avatars = [
@@ -93,8 +79,8 @@ const Character = ({ ...character }: CharacterProps)=> {
       <CardContent>
         <p> Né(e) le : {formattedBirthDate} </p>
           {character.deathDate 
-          ?<p>Mort(e) le : {character.deathDate}</p>
-          :<p>{getAgeInYearsMonthsDays(birthDate)}</p>
+          ?<p>Mort(e) le : {formattedDeathDate}</p>
+          :<p>{convertDate(birthDate)}</p>
           }
         <p>{character.longDescription}</p>  
       </CardContent>

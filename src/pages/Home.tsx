@@ -1,55 +1,80 @@
 import { Link } from 'react-router-dom';
+import ColorsPalette from '../components-lor/ColorsPalette';
+// import {
+//   NavigationMenu,
+//   NavigationMenuContent,
+//   NavigationMenuIndicator,
+//   NavigationMenuItem,
+//   NavigationMenuLink,
+//   NavigationMenuList,
+//   NavigationMenuTrigger,
+//   NavigationMenuViewport,
+// } from "@/components/ui/navigation-menu" ;
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu" ;
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
 
 function Home() {
-return (
-  <>
-  <h1 className="w-screen mx-auto">HOME</h1>
-  <NavigationMenu className="w-full container mx-auto bg-red-400 ">
-    <NavigationMenuList>
-      <NavigationMenuItem>
-        <Link to={`/characters`}>
-          <NavigationMenuLink>Home</NavigationMenuLink>
-        </Link>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuTrigger>Personnages</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <ul>
-            <li>
-              <Link to={`/characters`}>
-                <NavigationMenuLink>Parcourir</NavigationMenuLink>
-              </Link>
-            </li>
-            <li>
-              <Link to={`/character/new`}>
-                <NavigationMenuLink>Créer</NavigationMenuLink>
-              </Link>
-            </li>
-          </ul>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuTrigger>Stories</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <Link to={`/characters`}>
-            <NavigationMenuLink>Par personnage</NavigationMenuLink>
-          </Link>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    </NavigationMenuList>
-  </NavigationMenu>
-  </>
-);
+//  return (
+//   <Menu/> 
+//  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return (
+    <>
+<Menubar className="absolute right-[5vw] top-4 border-2  bg-secondary flex justify-center items-center text-nowrap">
+  <MenubarMenu >
+  <MenubarTrigger className="border-2 border-primary mx-0">
+    <Link to={`/`}>Home</Link>
+  </MenubarTrigger>
+  </MenubarMenu> 
+  <MenubarMenu>
+    <MenubarTrigger className="border-2 border-primary mx-0">Personnages</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem><Link to={`/characters/browse`}>Explorer</Link>
+      </MenubarItem>
+      <MenubarItem><Link to={`/characters/`}>Créer</Link></MenubarItem>
+      <MenubarItem><Link to={`/characters/`}>Au hasard</Link></MenubarItem>
+    </MenubarContent>
+  </MenubarMenu> 
+  <MenubarMenu className="border-2 border-primary">
+    <MenubarTrigger className="border-2 border-primary">Stories</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem> Explorer </MenubarItem>
+      <MenubarItem>Créer</MenubarItem>
+      <MenubarItem>Au hasard</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu> 
+  <MenubarMenu>
+  <MenubarTrigger className="border-2 border-primary">A propos </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem> Concepts </MenubarItem>
+      <MenubarItem>Règles et CGU</MenubarItem>
+      <MenubarItem>Mentions légales</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu> 
+</Menubar>
+
+      <ColorsPalette/>
+    </>
+  );
 }
 
 export default Home;
