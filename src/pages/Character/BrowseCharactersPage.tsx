@@ -11,6 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import useEmblaCarousel from 'embla-carousel-react'
 
 
 function BrowseCharactersPage() {
@@ -18,7 +19,9 @@ function BrowseCharactersPage() {
   // const [characters, setCharacters] = useState<[]>([]); // initaliser avec untabl vide pour ne pas avoir besoin de fr affichage conditionnel ?
   const [loading, setLoading] =useState<boolean>(true);
   const [error, setError] = useState<any | null>(null);
+  
 
+  useEmblaCarousel.globalOptions = { loop: true }
   useEffect(() => {
     // Remplace l'URL ci-dessous par celle de ton API réelle
     const fetchCharacters = async () => {
@@ -41,11 +44,16 @@ function BrowseCharactersPage() {
     if (error) return <p>Erreur : {error}</p>;
 console.log(characters);
   return (
-    <Carousel className='w-[60vw] h-screen flex justify-center items-center'>
-  <CarouselContent>
+    <Carousel className='w-[40vw] h-screen flex justify-center items-center' opts={{
+      // align: "start",
+      loop: true,
+      // active : false,
+      // axis : 'y',
+    }}>
+  <CarouselContent className='' >
   {characters.map((character )=> (
-  <CarouselItem key={character.id} className="basis-1/3 border-4 border-red-500" >
-    {character ? <Character {...character} className=" max-w-[100px] h-auto shrink-0"/> : <p>Aucun personnage trouvé.</p>}
+  <CarouselItem key={character.id} className="flex flex-col justify-center items-center basis-full max-w-[40vw] border-4 h-[90vh] border-green-500" >
+    {character ? <Character {...character} className="h-64"/> : <p>Aucun personnage trouvé.</p>}
   </CarouselItem>
 ))}
 
