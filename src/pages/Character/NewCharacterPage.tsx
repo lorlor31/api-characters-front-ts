@@ -1,82 +1,121 @@
+"use client"
 import { useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../../apiUrl.js'; 
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod" 
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,
+} from "@/components/ui/form"
 
-// TODO HOW TO VALIDATION TYPES ET CONTRAINTES SUR LE FORMULAIRE
-const CharacterForm = () => {
-    const [nickname, setNickname] = useState('');
-    const [abstract, setAbstract] = useState('');
-    const [birthDate, setBirthDate] = useState('');
-    const [deathDate, setDeathDate] = useState('');
-
-    const handleSubmit = async (e : React.FormEvent<HTMLFormElement> ) => {
-        e.preventDefault();
-
+export const NewCharacterPage = () => {
+	// Zod form schema for validation constraints and error messages
+	const formSchema = z.object({
+		nickname: z.string().min(1).max(255,{
+			message: "nickname must be at max 255 characters.",
+		}),
+		abstract: z.string().min(1).max(255),
+		long_description: z.string().min(1).max(10000),
+		birthDate: z.string(),
+		deathDate: z.string().nullable(),
+	})
+	// Form definition and default values
+	const form = useForm<z.infer<typeof formSchema>>({
+	resolver: zodResolver(formSchema),
+	defaultValues: {
+		nickname: "toto",
+		abstract: "toto",
+		long_description: "toto",
+		birthDate: "2020-01-01",
+		deathDate: "2020-01-01",
+	},
+	})
+    // Form submit handler
+	// This handler dont need event in arg cause it is already used by handlesubmit(onSubmit)
+    // It will use useForm.handleSubmit
+	const onSubmit = 
+	async ( values: z.infer<typeof formSchema>) => {
+		console.log("submission");
         const characterData = {
-            nickname,
-            abstract,
-            birthDate,
-            deathDate: deathDate || null, // if no deathDate is provided, send null
-        };
-        console.log(`${apiUrl}/characters/create`);
+		// Take the values of useForm (no need useState())
+		nickname: values.nickname,  // ✅ Prend la valeur de useForm
+      	abstract: values.abstract,
+		long_description: values.abstract,
+      	birthDate: values.birthDate,
+      	deathDate: values.deathDate,
+      	};
+      	console.log(`${apiUrl}/characters/create`);
+		try {
+			const response = await axios.post(`${apiUrl}/characters/create`, characterData);	
+			console.log('Personnage créé avec succès:', response.data);
+			// Vous pouvez ajouter des actions après la soumission réussie
+		} catch (error) {
+			console.error('Erreur lors de la création du personnage:', error);
+		}
+		console.log("values est : " ,values) ;
+		console.log("🚀 Données envoyées :", JSON.stringify(characterData, null, 2));
 
-        try {
-            const response = await axios.post(`${apiUrl}/characters/create`, characterData);
-            
-            console.log('Personnage créé avec succès:', response.data);
-            // Vous pouvez ajouter des actions après la soumission réussie
-        } catch (error) {
-            console.error('Erreur lors de la création du personnage:', error);
-        }
-    };
+    }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="nickname">Nickname</label>
-                <input
-                    type="text"
-                    id="nickname"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
-                    required
-                />
-            </div>
+	{console.log("❌ Erreurs de validation :", form.formState.errors);}
+	return (
+	<Form {...form}>
+	<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 
-            <div>
-                <label htmlFor="abstract">Abstract</label>
-                <textarea
-                    id="abstract"
-                    value={abstract}
-                    onChange={(e) => setAbstract(e.target.value)}
-                    required
-                />
-            </div>
+		<FormField
+		control={form.control}
+		name="nickname"
+		render={({ field }) => (
+			<FormItem>
+				<FormLabel>pseudo</FormLabel>
+				<FormControl>
+					<Input placeholder="shadcn" {...field} />
+				</FormControl>
+				<FormDescription>
+					nom de vot perso              
+				</FormDescription>
+				<FormMessage />
+			</FormItem>
+		)}
+		/>
+		<FormField
+		control={form.control}
+		name="long_description"
+		render={({ field }) => (
+			<FormItem>
+				<FormLabel>Description</FormLabel>
+				<FormControl>
+					<Input placeholder="shadcn" {...field} />
+				</FormControl>
+				<FormDescription>
+					Décrivez précisément :       
+				</FormDescription>
+				<FormMessage />
+			</FormItem>
+		)}
+		/>
+		<FormField
+		control={form.control}
+		name="abstract"
+		render={({ field }) => (
+			<FormItem>
+				<FormLabel>Résumé</FormLabel>
+				<FormControl>
+					<Input placeholder="shadcn" {...field} />
+				</FormControl>
+				<FormDescription>
+					Votre perso, en une phrase :        
+				</FormDescription>
+				<FormMessage />
+			</FormItem>
+		)}
+		/>
+		<Button type="submit">Enregistrer</Button>
+	</form>
+	</Form>
+);
+}
 
-            <div>
-                <label htmlFor="birthDate">Date de naissance</label>
-                <input
-                    type="date"
-                    id="birthDate"
-                    value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    required
-                />
-            </div>
-
-            <div>
-                <label htmlFor="deathDate">Date de décès (optionnelle)</label>
-                <input
-                    type="date"
-                    id="deathDate"
-                    value={deathDate}
-                    onChange={(e) => setDeathDate(e.target.value)}
-                />
-            </div>
-
-            <button type="submit">Créer le personnage</button>
-        </form>
-    );
-};
-
-export default CharacterForm;
+  export default NewCharacterPage;

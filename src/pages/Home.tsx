@@ -50,7 +50,7 @@ function Home() {
     <MenubarContent>
       <MenubarItem><Link to={`/characters/browse`}>Explorer</Link>
       </MenubarItem>
-      <MenubarItem><Link to={`/characters/`}>Créer</Link></MenubarItem>
+      <MenubarItem><Link to={`/character/new`}>Créer</Link></MenubarItem>
       <MenubarItem><Link to={`/characters/`}>Au hasard</Link></MenubarItem>
     </MenubarContent>
   </MenubarMenu> 
