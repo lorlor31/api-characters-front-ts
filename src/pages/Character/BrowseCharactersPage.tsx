@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from '../../apiUrl.js'; 
-import {CharacterProps} from '../../components-lor/Character.js' ;
-import Character from '../../components-lor/Character.js' ;
+import {CharacterProps} from '../../components-lor/Character.tsx' ;
+import Character from '../../components-lor/Character.tsx' ;
 import {
   Carousel,
   CarouselContent,
