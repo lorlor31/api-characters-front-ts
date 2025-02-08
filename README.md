@@ -7,7 +7,7 @@
 
 ## Objectifs : 
 - Faire des appels API vers mon API en Symfony :globe_with_meridians:
-- Faire mes premiers pas avec TypeScript <img src="https://icongr.am/devicon/typescript-plain.svg?size=128&color=currentColor" width="50">
+- Faire mes premiers pas avec TypeScript <img src="https://icongr.am/devicon/typescript-plain.svg?size=128&color=currentColor" width="10">
 
 ![GitHub Icon](https://icongr.am/devicon/typescript-plain.svg?size=128&color=currentColor
 )
