@@ -6,6 +6,8 @@
 - Shadcn.UI <img src="https://ui.shadcn.com/apple-touch-icon.png" width="18">
 
 ## Objectifs : 
-- Faire des appels API vers mon API en Symfony :globe_with_meridians:
+- M'amuser avec un projet où je suis libre de mes choix :dancer:
 - Faire mes premiers pas avec TypeScript <img src="https://icongr.am/devicon/typescript-plain.svg?size=128&color=currentColor" width="16">
 - Bien structurer le projet en découpant pertinemment :scissors:
+- Renforcer ma compréhension des hooks, de l'asynchrone et de l'utilisation d'une librairie de composants :flashlight:
+- Faire des appels API vers mon API en Symfony créée en parallèle :globe_with_meridians:
