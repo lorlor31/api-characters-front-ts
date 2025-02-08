@@ -9,8 +9,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { shuffle } from "@/functions/shuffle";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
 import { convertDate } from "@/functions/convertDate";
+import apiUrl from "../apiUrl.js";
+
 
 // TOPROBLEME POURQUOI LONG DESCRIPTION a un underescore et pas en camel case dans le json reçu ??
 export interface CharacterProps {
@@ -35,7 +36,7 @@ const Character = ({ ...character }: CharacterProps) => {
     : "";
 
   //Pick a random avatar if not defined
-  const avatars = ["bear", "dog", "giraf", "girl"];
+  const avatars = ["bear", "dog", "giraf", "maki","puppy"];
   const shuffledAvatars = shuffle(avatars);
   const randomAvatarImage = shuffledAvatars[0];
 
@@ -85,8 +86,8 @@ const Character = ({ ...character }: CharacterProps) => {
               className=" border-white border-solid border-6"
               src={
                 character.avatarImage
-                  ? `/src/assets/images/avatars/${character.avatarImage}`
-                  : `/src/assets/images/avatars/${randomAvatarImage}.jpg`
+                  ? `${apiUrl}/uploads/images/avatars/${character.avatarImage}`
+                  : `${apiUrl}/uploads/images/avatars/default/${randomAvatarImage}.jpg`
               }
             />
             <AvatarFallback>AvatarFallback</AvatarFallback>

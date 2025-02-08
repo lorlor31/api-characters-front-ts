@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { FileUploadForm } from "../../components-lor/FileUploadForm"; // Assurez-vous du bon chemin d'importation
+import { FileUploadForm } from "../../components-lor/FileUploadForm"; 
 import apiUrl from "../../apiUrl.js";
 
 // Exemple de schéma Zod avec fichier obligatoire
@@ -23,7 +23,7 @@ const formSchema = z.object({
   long_description: z.string().min(1, { message: "La description est requise." }).max(10000),
   birthDate: z.string(),
   deathDate: z.string().nullable(),
-  file: z.instanceof(File, { message: "Veuillez sélectionner un fichier." }).optional(),
+  avatar_image: z.instanceof(File, { message: "Veuillez sélectionner un fichier." }).optional(),
 });
 
 export const NewCharacterPage = () => {
@@ -34,15 +34,15 @@ export const NewCharacterPage = () => {
       nickname: "",
       abstract: "",
       long_description: "",
-      birthDate: "",
+      birthDate: "1980-01-23 00:00:00",
       deathDate: null,
-      file: undefined,
+      avatar_image: undefined,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log("Envoi du formulaire...", values);
-
+  
     const formData = new FormData();
     formData.append("nickname", values.nickname);
     formData.append("abstract", values.abstract);
@@ -51,19 +51,28 @@ export const NewCharacterPage = () => {
     if (values.deathDate) {
       formData.append("deathDate", values.deathDate);
     }
-    if (values.file) {
-      formData.append("file", values.file);
+    if (values.avatar_image) {
+      formData.append("avatar_image", values.avatar_image);
     }
-
+  
+    // Debug : affichage du contenu du FormData
+    for (let [key, value] of formData.entries()) {
+      console.log('Formadata key val est :');
+      console.log(key, value);
+    }
+    console.log('Formadata  est :');
+    console.log(formData.entries());
+  
     try {
       const response = await axios.post(`${apiUrl}/characters/create`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log("Personnage créé avec succès :", response.data);
+    });
+      console.log("✅ Personnage créé avec succès :", response.data);
     } catch (error) {
-      console.error("Erreur lors de la création :", error);
+      console.error("❌ Erreur lors de la création :", error);
     }
   };
+  
 
   return (
     <Form {...form}>

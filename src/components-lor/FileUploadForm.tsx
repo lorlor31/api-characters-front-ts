@@ -13,7 +13,7 @@ export function FileUploadForm() {
 
   return (
     <FormField
-      name="file"
+      name="avatar_image"
       render={({ field, fieldState }) => (
         <FormItem>
           <FormLabel>Fichier</FormLabel>
